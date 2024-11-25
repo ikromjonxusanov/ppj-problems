@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Problem_4 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
 //      Problem 7
 //        int number = scanner.nextInt();
 //        System.out.println(Integer.toBinaryString(number));
@@ -61,22 +61,36 @@ public class Problem_4 {
 //            System.out.println("illegal style");
 //        }
 //      Problem 8
-        System.out.print("Enter three boolean " +
-                "values (true or false) ");
-        boolean a = scanner.nextBoolean();
-        boolean b = scanner.nextBoolean();
-        boolean c = scanner.nextBoolean();
-        boolean allThree = a && b && c;
-        boolean exactlyOne = (a && !b && !c) || (!a && !b && c) || (!a && b && !c);
-        boolean exactlyTwo = (!a && b && c) || (a && !b && c) || (a && b && !c);
-        boolean atLeastOne = a || b || c;
-        boolean atLeastTwo = (a && b) || (b && c) || (a && c);
-        System.out.println("a, b, c = " + a + ", " + b +
-                ", " + c + "\nallThree: " + allThree +
-                "\nexactlyOne: " + exactlyOne +
-                "\nexactlyTwo: " + exactlyTwo +
-                "\natLeastOne: " + atLeastOne +
-                "\natLeastTwo: " + atLeastTwo);
+//        System.out.print("Enter three boolean " +
+//                "values (true or false) ");
+//        boolean a = scanner.nextBoolean();
+//        boolean b = scanner.nextBoolean();
+//        boolean c = scanner.nextBoolean();
+//        boolean allThree = a && b && c;
+//        boolean exactlyOne = (a && !b && !c) || (!a && !b && c) || (!a && b && !c);
+//        boolean exactlyTwo = (!a && b && c) || (a && !b && c) || (a && b && !c);
+//        boolean atLeastOne = a || b || c;
+//        boolean atLeastTwo = (a && b) || (b && c) || (a && c);
+//        System.out.println("a, b, c = " + a + ", " + b +
+//                ", " + c + "\nallThree: " + allThree +
+//                "\nexactlyOne: " + exactlyOne +
+//                "\nexactlyTwo: " + exactlyTwo +
+//                "\natLeastOne: " + atLeastOne +
+//                "\natLeastTwo: " + atLeastTwo);
 
+        int[] arr = {1, 4, 5, 3, 2, 0, 0, 1, 5}; // Example input array
+
+        int count = 0;
+
+        // Iterate over the array to check each sequence of three consecutive elements
+        for (int i = 0; i < arr.length - 2; i++) {
+            if ((arr[i] < arr[i + 1] && arr[i + 1] < arr[i + 2]) || // strictly increasing
+                    (arr[i] > arr[i + 1] && arr[i + 1] > arr[i + 2])) { // strictly decreasing
+                count++;
+            }
+        }
+
+        System.out.println("Number of strictly increasing or decreasing triplets: " + count);
     }
+
 }
