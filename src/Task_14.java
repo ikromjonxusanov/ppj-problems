@@ -3,9 +3,11 @@ import java.util.Scanner;
 class Child {
     private String name;
     private int numCandies = 2;
+
     public Child(String name) {
         this.name = name;
     }
+
     public void givesCandyTo(Child other) {
         if (numCandies > 0) {
             other.numCandies++;
@@ -13,6 +15,7 @@ class Child {
         }
         System.out.println("No candies to give!");
     }
+
     public static Child getChildByName(Child[] children, String name) {
         for (Child child : children) {
             if (child.name.equalsIgnoreCase(name)) {
@@ -21,9 +24,10 @@ class Child {
         }
         return null;
     }
+
     public static void printChildren(Child[] children) {
         String res = "[ ";
-        for (Child child: children) {
+        for (Child child : children) {
             res += "(" + child + ") ";
         }
         res += "]";
@@ -40,23 +44,34 @@ class Person {
     private String name;
     private int age;
 
-    public Person (String name, int age) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
-    public int getAge() {
+
+    public int age() {
         return age;
     }
 
+    @Override
+    public String toString() {
+        return "[ " + name + ", " + age + " ]";
+    }
+
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age);
+    }
+
 }
+
 public class Task_14 {
     public static void main(String[] args) {
         // Problem 1
-//        Child[] children = new Child[3];
+//        Child[] children = new     Child[3];
 //        Scanner sc = new Scanner(System.in);
 //        System.out.println("3 children will be created");
 //        for (int i = 0; i < children.length; ++i) {
@@ -90,5 +105,12 @@ public class Task_14 {
 //            }
 //        }
 
+        Person p1 = new Person("Ikrom", 18);
+        Person p2 = new Person("Zohid", 20);
+        Person p3 = new Person("Shox", 18);
+
+        System.out.println(p1.compareTo(p2));
+        System.out.println(p2.compareTo(p1));
+        System.out.println(p1.compareTo(p3));
     }
 }
