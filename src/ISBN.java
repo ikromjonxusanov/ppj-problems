@@ -1,4 +1,3 @@
-import java.io.Serializable;
 import java.util.*;
 
 public class ISBN {
@@ -7,34 +6,33 @@ public class ISBN {
         System.out.print(isbn + " ");
         isbn = isbn.replace("-", "");
         if (isbn.length() > 10) {
-            System.out.println("Error. There are too many digits\n");
+            System.out.print("Error: there are too many digits\n");
             return;
         } else if (isbn.length() < 10) {
-            System.out.print("Error. There are too few digits\n");
+            System.out.print("Error: there are too few digits\n");
             return;
         }
         int sum = 0;
         for (int i = 0; i < isbn.length(); i++) {
             char ch = isbn.charAt(i);
-            if ((48 <= ch && ch <= 57) || (ch == 88)) {
-                int digit = (ch == 'X') ? 10 : Character.getNumericValue(ch);
+            if ((48 <= ch && ch <= 57) || ch == 88) {
+                int digit = ch == 'X' ? 10 : Character.getNumericValue(ch);
                 sum += digit * (10 - i);
             } else {
-                System.out.print("ERROR. Invalid character " + ch + "\n");
+                System.out.print("Error: invalid character " + ch + "\n");
                 return;
             }
         }
         if (sum % 11 == 0) {
             System.out.print("OK\n");
         } else {
-            char last_ch = isbn.charAt(isbn.length()-1);
-            int digit = (last_ch == 'X') ? 10 : Character.getNumericValue(last_ch);
-            sum -= digit;
-            int correctDigit = ((11 - (sum % 11)) % 11);
+            char lastCh = isbn.charAt(isbn.length() - 1);
+            int lastDigit = lastCh == 'X' ? 10 : Character.getNumericValue(lastCh);
+            sum -= lastDigit;
+            int correctDigit = (11 - (sum % 11));
             char correctCh = (correctDigit == 10) ? 'X' : Character.forDigit(correctDigit, 10);
-            System.out.print("ERROR. Check digit should be " + correctCh + "\n");
+            System.out.print("ERROR Check digit should be " + correctCh + "\n");
         }
-
     }
 
     public static void main(String[] args) {

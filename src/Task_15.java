@@ -1,64 +1,66 @@
-record EAddress(String user, String domain) {
-    @Override
-    public String toString() {
-        return user + "@" + domain;
+
+class Product {
+    public String name;
+    public int quantity;
+
+    public Product(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 }
-record Email(EAddress sender, EAddress recipient, String message) {}
 
-class MailUtils {
+class Box {
+    public String id;
+    public Product[] products;
+    public Box(String id, Product[] products) {
+        this.id = id;
+        this.products = products;
+    }
+}
 
-    public static void sort(Email[] emails) {
-        
+class Storage{
+    public Box[] boxes;
+
+    public Storage(Box[] boxes) {
+        this.boxes = boxes;
     }
 
-    public static void printMails(Email[] emails) {
-        for (Email email :emails) {
-            System.out.println(email.sender() + "->" + email.recipient() + ": " + email.message());
+    public int totQuant(String prodName) {
+        int totalQuantity = 0;
+        for (Box box : boxes) {
+            for (Product product : box.products) {
+                if (product.name.equals(prodName)) {
+                    totalQuantity+=product.quantity;
+                }
+            }
         }
-    }
-
-    public static Email[] bulkMail(EAddress sender, EAddress[] recipients, String message) {
-        Email[] arr = new Email[recipients.length];
-        for (int i = 0; i < recipients.length; i++) {
-            arr[i] = new Email(sender, recipients[i], message);
-        }
-        return arr;
+        return totalQuantity;
     }
 }
 
 public class Task_15 {
     public static void main(String[] args) {
-        EAddress[] senders = {
-                new EAddress("d", "ab.com"),
-                new EAddress("e", "cd.gov"),
-                new EAddress("d", "cd.gov"),
-                new EAddress("a", "ef.org"),
-                new EAddress("e", "ab.com"),
-                new EAddress("b", "cd.gov")
-        };
+//        Box box1 = new Box("Box1",
+//                new Product[]{
+//                        new Product("Carrot", 15),
+//                        new Product("Apples", 20)
+//                });
+//        Box box2 = new Box("Box2",
+//                new Product[]{
+//                        new Product("Potato", 10),
+//                        new Product("Carrot", 12)
+//                });
+//        Storage sto = new Storage(
+//                new Box[]{box1, box2});
+//        System.out.println("Tot. quantity of product: " +
+//                sto.totQuant("Carrot"));
+        MyString newstring = new MyString("Hello World");
 
-        EAddress[] recipients = {
-                new EAddress("y", "ab.com"),
-                new EAddress("x", "gh.gov"),
-                new EAddress("z", "gh.gov"),
-                new EAddress("u", "az.org"),
-                new EAddress("x", "ab.com"),
-                new EAddress("x", "cd.gov")
-        };
+        System.out.println(newstring);
+        System.out.println(newstring.getLength());
+        newstring.insert(5, ",");
+        System.out.println(newstring);
 
-        String[] messages = {
-                "abc", "def", "ghi", "jkl", "mno", "pqr"};
 
-        Email[] emails = new Email[senders.length];
-        for (int i = 0; i < emails.length; ++i)
-            emails[i] = new Email(senders[i], recipients[i],
-                    messages[i]);
-
-        MailUtils.sort(emails);
-        MailUtils.printMails(emails);
-        Email[] bulkEmails = MailUtils.bulkMail(
-                senders[0], recipients, "ABC");
-        MailUtils.printMails(bulkEmails);
     }
 }
